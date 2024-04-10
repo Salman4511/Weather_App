@@ -14,6 +14,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+    late String greeting = '';
+   void _updateGreeting() {
+    final hour = DateTime.now().hour;
+
+    if (hour < 12) {
+      setState(() {
+        greeting = 'Good Morning';
+      });
+    } else if (hour < 17) {
+      setState(() {
+        greeting = 'Good Afternoon';
+      });
+    } else {
+      setState(() {
+        greeting = 'Good Evening';
+      });
+    }
+  }
 
   Widget getWeatherIcon(int code) {
     switch (code) {
@@ -101,9 +119,9 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           height: 8,
                         ),
-                        const Text(
-                          'Good Morning',
-                          style: TextStyle(
+                         Text(
+                          greeting,
+                          style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 25),
@@ -112,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                          Center(
                           child: Text(
                             '${state.weather.temperature!.celsius!.round()}°C',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 55),
@@ -121,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                          Center(
                           child: Text(
                             state.weather.weatherMain!.toUpperCase(),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 25),
@@ -132,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                           child: Text(
                             DateFormat('EEEE dd •').add_jm().format(state.weather.date!),
                             // 'Friday 16 - 09:41 am',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w300,
                                 fontSize: 16),
@@ -156,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                                  Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Sunrise',
                                       style: TextStyle(
                                         color: Colors.white,
@@ -169,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                                             .format(state.weather.sunrise!),
                                    
                                       // '5:32 am',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -190,7 +208,7 @@ class _HomePageState extends State<HomePage> {
                                  Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Sunset',
                                       style: TextStyle(
                                         color: Colors.white,
@@ -202,7 +220,7 @@ class _HomePageState extends State<HomePage> {
                                             .add_jm()
                                             .format(state.weather.sunset!),
                                       // '5:32 pm',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -236,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                                  Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Temp Max',
                                       style: TextStyle(
                                         color: Colors.white,
@@ -245,7 +263,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     Text(
                                       "${state.weather.tempMax!.celsius!.round()}°C",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -266,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                                  Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Temp Min',
                                       style: TextStyle(
                                         color: Colors.white,
@@ -275,7 +293,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     Text(
                                       "${state.weather.tempMin!.celsius!.round()}°C",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -291,7 +309,7 @@ class _HomePageState extends State<HomePage> {
                   );
                   }
                   else{
-                    return SizedBox();
+                    return const SizedBox();
                   }
                 },
               )
